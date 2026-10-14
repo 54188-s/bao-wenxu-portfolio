@@ -1,0 +1,1203 @@
+{
+  "checks": [
+    {
+      "name": "Exactly 15 HTML pages",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "account.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "analysis.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "body.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cardio.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "exercise.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foods.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "index.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "library.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "meals.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nutrition.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "strength.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "training.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "user.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "weight.html static no SPA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "All local links and assets exist",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Home links to every secondary page",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Every page returns home",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Formula bmi",
+      "passed": true,
+      "detail": "22.857142857142858"
+    },
+    {
+      "name": "Formula bmr",
+      "passed": true,
+      "detail": "1673.75"
+    },
+    {
+      "name": "Formula tdee",
+      "passed": true,
+      "detail": "2301.40625"
+    },
+    {
+      "name": "Formula cut",
+      "passed": true,
+      "detail": "1901.40625"
+    },
+    {
+      "name": "Formula bulk",
+      "passed": true,
+      "detail": "2701.40625"
+    },
+    {
+      "name": "Formula cardio",
+      "passed": true,
+      "detail": "360.1500000000001"
+    },
+    {
+      "name": "Formula oneRM",
+      "passed": true,
+      "detail": "76"
+    },
+    {
+      "name": "Formula ffmi",
+      "passed": true,
+      "detail": "19.428571428571427"
+    },
+    {
+      "name": "Formula strength",
+      "passed": true,
+      "detail": "91 (original rounding and 0.28 load factor retained)"
+    },
+    {
+      "name": "Macro targets",
+      "passed": true,
+      "detail": "{'protein': 140, 'fat': 64, 'carb': 291, 'target': 2301}"
+    },
+    {
+      "name": "Extreme goal has no negative calories",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Exercise IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "All preset exercises exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Drawer opens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Drawer Escape closes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel changes content",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Local MP4 plays",
+      "passed": true,
+      "detail": "{'duration': 12, 'time': 0.500494, 'error': None}"
+    },
+    {
+      "name": "Profile across pages",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight saves and syncs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight same-date update",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Original leg template preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training plan saves",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training check-in is idempotent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training survives reload",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "History shows training details",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Live exercise search",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Real exercise detail URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Exercise joins draft",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Invalid exercise handled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Custom food saves",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Food amount scales nutrition",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Meal across pages",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Donut renders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Donut percentages sum to 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Cardio saves to history",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Bodyweight 1RM handled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Invalid strength input handled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Account register",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Password not stored plaintext",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Wrong password rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Account login",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "User profile",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Legacy plans migrate",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Legacy source retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Legacy custom foods retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Corrupt JSON uses safe defaults",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Double-click file profile sharing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "All file-mode pages load without JS errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Food category filters",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Delete dialog cancellation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Custom food delete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saved meal survives source food deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Meal deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Empty analysis safe",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Clear meals confirms and clears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training checkbox toggles",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training action removal",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saved plan loads",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training draft clears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saved plan deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Training history deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight record deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "account.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "analysis.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "body.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cardio.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "exercise.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foods.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "index.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "library.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "meals.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nutrition.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "strength.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "training.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "user.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "weight.html 1440 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "account.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "analysis.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "body.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cardio.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "exercise.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foods.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "index.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "library.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "meals.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nutrition.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "strength.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "training.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "user.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "weight.html 1024 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "account.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "analysis.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "body.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cardio.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "exercise.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foods.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "index.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "library.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "meals.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nutrition.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "strength.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "training.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "user.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "weight.html 768 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "account.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "analysis.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "body.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cardio.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "exercise.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foods.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "index.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "library.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "meals.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nutrition.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "strength.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "training.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "user.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "weight.html 375 safe UI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No horizontal overflow at four sizes",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No browser JS exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No HTTP errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Original strength formula exact",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Legacy dairy category preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final index 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel local image 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final index 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel local image 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final index 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel local image 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final index 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel local image 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final strength 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final strength 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final strength 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final strength 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final training 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final training 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final training 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final training 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final weight 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final weight 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final weight 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final weight 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile SVG uses viewport width",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final cardio 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final cardio 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final cardio 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final cardio 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final body 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final body 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final body 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final body 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final account 1440 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final account 1024 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final account 768 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final account 375 overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Zero target home no NaN",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final affected pages JS errors zero",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible index 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel image aspect ratio 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible weight 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight summary visible 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Height resize preserves summary 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible index 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel image aspect ratio 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible weight 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight summary visible 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Height resize preserves summary 1024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible index 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel image aspect ratio 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible weight 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight summary visible 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Height resize preserves summary 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible index 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel image aspect ratio 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Final visible weight 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Weight summary visible 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Height resize preserves summary 375",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Last visual fixes no JS errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel CTA no split 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Carousel CTA no split 375",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "overflow": [],
+  "screenshots": [
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1024-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-768-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-full.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-scroll-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-scroll-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-scroll-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-1440-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\account-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\analysis-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\body-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\cardio-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\exercise-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\foods-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\index-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\library-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\meals-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\metrics-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\nutrition-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\strength-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\training-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\user-375-supplement-2.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-supplement-0.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-supplement-1.png",
+    "C:\\Users\\baowenxu\\Documents\\Codex\\2026-10-05\\files-pasted-by-the-user-spa\\work\\screenshots\\weight-375-supplement-2.png"
+  ]
+}

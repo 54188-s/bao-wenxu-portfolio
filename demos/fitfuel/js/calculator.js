@@ -1,0 +1,20 @@
+"use strict";
+window.FitCalc = (() => {
+  const safeNumber=(v,fallback=0)=>v!==''&&v!==null&&Number.isFinite(Number(v))?Number(v):fallback;
+  const clamp=(v,min,max)=>Math.max(min,Math.min(max,safeNumber(v,min)));
+  const round=(v,d=0)=>Math.round(safeNumber(v)*10**d)/10**d;
+  const valid=(v,min,max,int=false)=>v!==''&&v!==null&&Number.isFinite(Number(v))&&Number(v)>=min&&Number(v)<=max&&(!int||Number.isInteger(Number(v)));
+  const calculateBMI=(w,h)=>valid(w,30,300)&&valid(h,100,250)?Number(w)/(Number(h)/100)**2:0;
+  const calculateBMR=(p)=>10*p.weight+6.25*p.height-5*p.age+(p.gender==='female'?-161:5);
+  const calculateTDEE=(p)=>calculateBMR(p)*p.activityLevel;
+  const calculateTargetCalories=(p)=>Math.max(0,calculateTDEE(p)+(p.goal==='cut'?-400:p.goal==='bulk'?400:0));
+  const calculateMacros=(p)=>{const target=calculateTargetCalories(p);const protein=round(p.weight*(p.goal==='cut'?2.2:p.goal==='bulk'?1.8:2));const fat=round(target*.25/9);const carb=Math.max(0,round((target-protein*4-fat*9)/4));return{protein,fat,carb,target:round(target)}};
+  const calculateCardioCalories=(met,w,min)=>valid(met,.1,30)&&valid(w,30,300)&&valid(min,1,600)?Number(met)*3.5*Number(w)/200*Number(min):0;
+  const calculateOneRM=(w,r)=>valid(w,.1,500)&&valid(r,1,12,true)?Number(w)*(1+Number(r)/30):0;
+  const calculateStrengthCalories=(ex,sets,reps,load,bw)=>{if(!ex||!valid(sets,1,30,true)||!valid(reps,1,180,true)||!valid(load,0,500)||!valid(bw,30,300))return 0;return Math.round(ex.met*1.05*bw*(sets*2.5/60)*(1+Math.min(.35,Math.min(1.2,load/bw)*.28)))};
+  const calculateFFMI=(p)=>p.weight*(1-p.bodyFat/100)/(p.height/100)**2;
+  const bmiCategory=(v)=>v<18.5?'偏低':v<25?'参考正常范围':v<30?'偏高':'较高';
+  const totals=(items)=>items.reduce((sum,m)=>{for(const k of ['kcal','protein','fat','carb'])sum[k]+=safeNumber(m[k]);return sum},{kcal:0,protein:0,fat:0,carb:0});
+  const meal=(food,grams,slot,date)=>({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),date,slot,name:food.name,grams:Number(grams),...Object.fromEntries(['kcal','protein','fat','carb'].map(k=>[k,round(safeNumber(food[k])*Number(grams)/100,2)]))});
+  return {safeNumber,clamp,round,valid,calculateBMI,calculateBMR,calculateTDEE,calculateTargetCalories,calculateMacros,calculateCardioCalories,calculateOneRM,calculateStrengthCalories,calculateFFMI,bmiCategory,totals,meal};
+})();
