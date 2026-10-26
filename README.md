@@ -15,6 +15,24 @@
 5. 赛博西安：AI 城市影像
 6. 视觉的四种语气：四张精选海报
 
+
+## 项目与资源直达
+
+GitHub 文件页显示 HTML 源码；运行网页版请使用下面的在线地址。项目详情采用 `#/project/...` 哈希路由，请保留 `#`。
+
+| 项目 | 详情 | 演示 / 视频 |
+| --- | --- | --- |
+| 站在芯上的孩子 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/standing-on-the-core) | [打开视频](https://54188-s.github.io/bao-wenxu-portfolio/videos/core.mp4) |
+| FitFuel Pro | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/fitfuel-pro) | [打开演示](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/index.html) |
+| Apple Universe | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/apple-universe) | [打开演示](https://54188-s.github.io/bao-wenxu-portfolio/demos/apple/index.html) |
+| 绿釉陶犬 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/green-glazed-dog) | 图片见项目详情 |
+| 赛博西安 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/cyber-xian) | [打开视频](https://54188-s.github.io/bao-wenxu-portfolio/videos/cyber.mp4) |
+| 视觉的四种语气 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/poster-studies) | 图片见项目详情 |
+
+- [FitFuel 介绍视频](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/video/fitfuel-intro.mp4)
+- [全部作品](https://54188-s.github.io/bao-wenxu-portfolio/#/works) · [关于与 PDF 入口](https://54188-s.github.io/bao-wenxu-portfolio/#/about)
+- [入口检查记录与待实测清单](docs/LINK_AUDIT.md)
+
 ## 本地查看
 
 完整解压离线包，双击「打开作品集.html」。无需安装依赖或启动服务器。包含三个相关视频、两个网页作品及精选 PDF，请保留完整目录。
