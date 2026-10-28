@@ -1,0 +1,180 @@
+[
+  {
+    "file": "tesseract.min.js",
+    "source": "https://registry.npmjs.org/tesseract.js/-/tesseract.js-6.0.1.tgz",
+    "package": "tesseract.js",
+    "version": "6.0.1",
+    "bytes": 62961,
+    "sha256": "10fff78484067759c43028a02a72d76d0b90eb17302bb23b58a9ec5410bc928b",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "worker.min.js",
+    "source": "https://registry.npmjs.org/tesseract.js/-/tesseract.js-6.0.1.tgz",
+    "package": "tesseract.js",
+    "version": "6.0.1",
+    "bytes": 111162,
+    "sha256": "38645599043239c0eb6db08a6504a92dcdc292200535f3e9339cd77c4443b842",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract.js-LICENSE.txt",
+    "source": "https://registry.npmjs.org/tesseract.js/-/tesseract.js-6.0.1.tgz",
+    "package": "tesseract.js",
+    "version": "6.0.1",
+    "bytes": 11357,
+    "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract.min.js.LICENSE.txt",
+    "source": "https://registry.npmjs.org/tesseract.js/-/tesseract.js-6.0.1.tgz",
+    "package": "tesseract.js",
+    "version": "6.0.1",
+    "bytes": 149,
+    "sha256": "cdf963ced7d25a0f98901a547647b4d6e2dbe0197fd78c87a059a87b0e542fe2",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "worker.min.js.LICENSE.txt",
+    "source": "https://registry.npmjs.org/tesseract.js/-/tesseract.js-6.0.1.tgz",
+    "package": "tesseract.js",
+    "version": "6.0.1",
+    "bytes": 466,
+    "sha256": "45f54171aeaa1d10c0c1a66f374b7bba1f02472b1487fbe892eec04f840002ac",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract.js-core-LICENSE.txt",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 11358,
+    "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-lstm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 124747,
+    "sha256": "48a3ee8e00924cb8c7f0cc0d099b1318fea120af56b3ee8fb3a70dd2311806c2",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-lstm.wasm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 3954181,
+    "sha256": "775a35df6f2ae100e02609443e6bd5cafcd07983dd6175454ca4a432a7730687",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd-lstm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 124752,
+    "sha256": "be3504705d7111d1d1f3f7f9dff326c26d334031ede36e31c4d3cf883027e982",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd-lstm.wasm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 3954569,
+    "sha256": "9d7c43fb206dc9f48475228b46bf35f888fa9e6259da2e67d5a75c77049f2dc7",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 124435,
+    "sha256": "85762abcc52bc6f4762b1429e2986c8ea963db76632770970c0485fb6d6aa820",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd.wasm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 4751193,
+    "sha256": "3b0678c47a8dea6abb931b214171c08b742a5b9a9fcbbb1a028a08d5de6e9d4c",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 124430,
+    "sha256": "8d7d9776c8552951f8d3bb903dafb22d4e2e065564d7e1b3d523383670a94ecd",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core.wasm.js",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 4750805,
+    "sha256": "e66872f6a76f5ad414d73d21512245df0de3060ad4871a97c47efceaab27b955",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-lstm.wasm",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 2871085,
+    "sha256": "220e2e87551edccb85519796a170469f8ab2a8055216789e3b8b1ada18b7bc2b",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd-lstm.wasm",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 2871377,
+    "sha256": "187d76742dfc0d8929f0b49a619f145bb6370730776c7bd0d3e20c6b2098808d",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core-simd.wasm",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 3469078,
+    "sha256": "ca11ee92a02023e4f5083eefd0966fb83b297416da54e997b9f6ce445f719c9b",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "tesseract-core.wasm",
+    "source": "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-6.0.0.tgz",
+    "package": "tesseract.js-core",
+    "version": "6.0.0",
+    "bytes": 3468788,
+    "sha256": "740f7e466a2f026e1f1e54a2e0d9957e386d8166110d1290224abd3d08986106",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "lang/eng.traineddata.gz",
+    "source": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int/eng.traineddata.gz",
+    "version": "1.0.0/4.0.0_best_int",
+    "bytes": 2952873,
+    "sha256": "45b4cb346724ac1774f1c36f42f182b887bcdb28ebe63e6fff90ac41f3fcff91",
+    "license": "Apache-2.0"
+  },
+  {
+    "file": "lang/chi_sim.traineddata.gz",
+    "source": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/chi_sim@1.0.0/4.0.0_best_int/chi_sim.traineddata.gz",
+    "version": "1.0.0/4.0.0_best_int",
+    "bytes": 1718768,
+    "sha256": "b8a23f10c7de500891eb458a8adc9cc58ab7f242f08b7d149f5e9aea4ad5db7c",
+    "license": "Apache-2.0"
+  }
+]

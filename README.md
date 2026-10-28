@@ -1,51 +1,30 @@
-# 鲍温旭 · 精选作品集
+# 鲍温旭 · AI视觉与产品体验
 
-数字媒体艺术 · 2027 届。精选 6 个项目，展示文化角色、视觉设计、AI 影像和网页交互。
+数字媒体艺术2027届本科生。求职方向：AIGC设计、AI产品与运营实习。
 
-- [在线浏览作品集](https://54188-s.github.io/bao-wenxu-portfolio/)
-- [查看精选 PDF（12 页）](portfolio.pdf)
-- [下载离线作品包（约 38.7 MB）](https://github.com/54188-s/bao-wenxu-portfolio/raw/refs/heads/main/downloads/portfolio-offline.zip)
-
-## 精选项目
-
-1. 站在芯上的孩子：社火角色与 AI 影像
-2. FitFuel Pro：健身管理网页
-3. Apple Universe：非官方数字展览网页
-4. 绿釉陶犬：文化海报与文创应用
-5. 赛博西安：AI 城市影像
-6. 视觉的四种语气：四张精选海报
-
+- [在线作品集](https://54188-s.github.io/bao-wenxu-portfolio/)
+- [精选PDF，12页](https://54188-s.github.io/bao-wenxu-portfolio/portfolio.pdf)
+- [离线作品包，约62.6 MB](https://github.com/54188-s/bao-wenxu-portfolio/raw/refs/heads/main/downloads/portfolio-offline.zip)
 
 ## 项目与资源直达
 
-GitHub 文件页显示 HTML 源码；运行网页版请使用下面的在线地址。项目详情采用 `#/project/...` 哈希路由，请保留 `#`。
-
-| 项目 | 详情 | 演示 / 视频 |
+| 项目 | 案例 / 演示 | 视频 |
 | --- | --- | --- |
-| 站在芯上的孩子 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/standing-on-the-core) | [打开视频](https://54188-s.github.io/bao-wenxu-portfolio/videos/core.mp4) |
-| FitFuel Pro | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/fitfuel-pro) | [打开演示](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/index.html) |
-| Apple Universe | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/apple-universe) | [打开演示](https://54188-s.github.io/bao-wenxu-portfolio/demos/apple/index.html) |
-| 绿釉陶犬 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/green-glazed-dog) | 图片见项目详情 |
-| 赛博西安 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/cyber-xian) | [打开视频](https://54188-s.github.io/bao-wenxu-portfolio/videos/cyber.mp4) |
-| 视觉的四种语气 | [项目详情](https://54188-s.github.io/bao-wenxu-portfolio/#/project/poster-studies) | 图片见项目详情 |
+| FitFuel Pro | [产品案例](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/case.html) · [健身首页](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/index.html) · [标签录入](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/foods.html?capture=1) | [介绍短片](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/video/fitfuel-intro.mp4) |
+| 站在芯上的孩子 | [角色与影像案例](https://54188-s.github.io/bao-wenxu-portfolio/cases/core.html) | [完整影像](https://54188-s.github.io/bao-wenxu-portfolio/videos/core.mp4) |
+| 赛博西安 | [影像案例](https://54188-s.github.io/bao-wenxu-portfolio/cases/cyber.html) | [完整短片](https://54188-s.github.io/bao-wenxu-portfolio/videos/cyber.mp4) |
+| Apple Universe | [非官方数字展览](https://54188-s.github.io/bao-wenxu-portfolio/demos/apple/index.html) | — |
+| 海报实验 / 绿釉陶犬 | [完整图片](https://54188-s.github.io/bao-wenxu-portfolio/#gallery) | — |
+| LOOP / PIP | [补充静态概念](https://54188-s.github.io/bao-wenxu-portfolio/#concepts) | 未制作新短片 |
 
-- [FitFuel 介绍视频](https://54188-s.github.io/bao-wenxu-portfolio/demos/fitfuel/video/fitfuel-intro.mp4)
-- [全部作品](https://54188-s.github.io/bao-wenxu-portfolio/#/works) · [关于与 PDF 入口](https://54188-s.github.io/bao-wenxu-portfolio/#/about)
-- [入口检查记录与待实测清单](docs/LINK_AUDIT.md)
+## 使用与边界
 
-## 本地查看
+首页提供设计、产品两种浏览顺序；旧 `#/works`、`#/about` 与项目链接保留兼容跳转。主要内容直接写入HTML，关闭JavaScript仍可浏览项目、播放视频和打开PDF。
 
-完整解压离线包，双击「打开作品集.html」。无需安装依赖或启动服务器。包含三个相关视频、两个网页作品及精选 PDF，请保留完整目录。
+FitFuel使用Tesseract.js本地OCR、字段规则与人工确认。模型随站点提供，图片不上传。合成标签功能验收29项通过，真实包装识别质量与用户收益待验证；本项目没有训练模型。
 
-## 文件说明
+离线包完整解压后双击“打开作品集.html”。图片、视频和网页可直接浏览；图片OCR建议在线体验。可选本地预览启动器需要已有Python 3。
 
-- `index.html`：网站入口
-- `assets/`：页面脚本、样式与图片
-- `videos/`：作品视频
-- `demos/`：健身和苹果网页独立演示
-- `portfolio.pdf`：精选 PDF
-- `downloads/portfolio-offline.zip`：可直接转发的离线包
+本轮PDF与ZIP已同步，ZIP小于100,000,000字节且CRC检查通过。历史静态入口检查保存在[LINK_AUDIT](docs/LINK_AUDIT.md)，当前发布说明见[REFINED_RELEASE](docs/REFINED_RELEASE.md)。
 
-这是可直接部署的静态交付版本。GitHub Pages 从 `main` 分支根目录发布。
-
-作品用于个人求职展示。AI 辅助内容已在对应项目注明；产品图像、商标等第三方素材归相应权利人所有。此仓库不授予第三方素材的再许可。
+作品用于个人求职。AI辅助内容已在相应项目说明；第三方产品、图片、商标与模型归相应权利人。开源OCR许可证与来源见 `demos/fitfuel/vendor/ocr/`，不授予第三方素材再许可。

@@ -1,0 +1,14 @@
+*.pdf binary
+*.zip binary
+*.png binary
+*.webp binary
+*.jpg binary
+*.mp4 binary
+*.wasm binary
+*.gz binary
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.txt text eol=lf

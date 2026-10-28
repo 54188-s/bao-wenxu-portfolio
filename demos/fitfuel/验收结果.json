@@ -1,0 +1,186 @@
+{
+  "scope": "Local Edge + synthetic label fixtures; NOT user research or real-packaging accuracy",
+  "checks": [
+    {
+      "name": "首次任务入口存在",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "页脚无待填写与作品许可证占位",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "真实中文图像识别提取四项数值",
+      "passed": true,
+      "detail": {
+        "values": {
+          "name": "测试燕麦",
+          "servingMode": "per100g",
+          "energyUnit": "kJ",
+          "kcal": "840",
+          "protein": "10",
+          "fat": "5",
+          "carb": "30"
+        },
+        "status": "识别出 4/4 项核心营养数值，仍需逐项核对。",
+        "total_seconds": 0.56
+      }
+    },
+    {
+      "name": "中文单位与基准识别",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "识别不自动勾选确认",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "未确认不能保存",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "修改后撤销旧确认",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "kJ换算保留原始数值",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "识别食物按克数进入饮食记录",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "记录刷新后保留",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "记录进入营养分析",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "图像识别 nutrition-english.png",
+      "passed": true,
+      "detail": {
+        "got": {
+          "kcal": "200",
+          "energyUnit": "kcal",
+          "servingMode": "per100g",
+          "servingWeight": "",
+          "protein": "10",
+          "fat": "5",
+          "carb": "30"
+        },
+        "status": "识别出 4/4 项核心营养数值，仍需逐项核对。"
+      }
+    },
+    {
+      "name": "图像识别 nutrition-serving.png",
+      "passed": true,
+      "detail": {
+        "got": {
+          "kcal": "420",
+          "energyUnit": "kJ",
+          "servingMode": "serving",
+          "servingWeight": "50",
+          "protein": "5",
+          "fat": "",
+          "carb": "15"
+        },
+        "status": "识别出 3/4 项核心营养数值，仍需逐项核对。"
+      }
+    },
+    {
+      "name": "按份样例单位g误读为9时不猜测缺失脂肪",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "每份转每100g且不重复换算",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "空图不编造营养数值",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "识别失败后可手动文字补录",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "毫升基准不冒充每100g",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "多基准不自动选列",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "中文OCR插入空格仍可解析",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "缺失数值保持空白",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "取消后可继续手动填写",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "无外部图片或模型请求",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "无页面脚本错误",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "手机无横向溢出 index.html",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "手机无横向溢出 foods.html?capture=1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "手机弹窗无内部横向溢出",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "手机无横向溢出 case.html",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "直接HTML清楚说明完整识别入口",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 29,
+  "total": 29
+}

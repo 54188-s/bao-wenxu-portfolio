@@ -1,6 +1,6 @@
-# 营养成分表接口
+# 营养成分表接口（历史方案）
 
-默认没有连接任何收费或免费的图像 OCR 服务。选择照片后会显示图片并进入手动填写；不会根据食物照片估算热量，也不会自动保存识别草稿。
+本文记录原小程序与旧网页的 Provider 接口。本轮网页版已改为 `js/label-parser.js` + `js/ocr-local.js`，接入 Tesseract.js 本地识别；当前实现、边界和验收见 `本轮功能说明.md`。下面的未接入状态与接口示例属于旧版，不代表本轮网页。
 
 共享模块 `src/utils/ocr.js` 提供 `setProvider`、`recognizeNutritionLabel`、`parseText`。网页版对应 `js/ocr.js`，函数完全一致。
 
