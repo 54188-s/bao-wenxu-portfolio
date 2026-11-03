@@ -1,6 +1,6 @@
 "use strict";
 const slides=[
- {src:'assets/work-057.webp',alt:'站在芯上的孩子角色三视图',title:'站在芯上的孩子 · 角色与影像',href:'cases/core.html'},
+ {src:'assets/work-057.webp',alt:'站在芯上的孩子角色三视图',title:'陇州社火 · 公益影像与角色',href:'cases/core.html'},
  {src:'demos/fitfuel/images/case-home.webp',alt:'FitFuel可操作产品首页',title:'FitFuel Pro · 产品原型',href:'demos/fitfuel/case.html'},
  {src:'assets/work-079.webp',alt:'赛博西安古塔与数字光影',title:'赛博西安 · AI城市影像',href:'cases/cyber.html'}
 ];
