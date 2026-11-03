@@ -1,7 +1,7 @@
 "use strict";
 const slides=[
  {src:'assets/work-057.webp',alt:'站在芯上的孩子角色三视图',title:'陇州社火 · 公益影像与角色',href:'cases/core.html'},
- {src:'demos/fitfuel/images/case-home.webp',alt:'FitFuel可操作产品首页',title:'FitFuel Pro · 产品原型',href:'demos/fitfuel/case.html'},
+ {src:'assets/fitfuel-current.png',alt:'FitFuel可操作产品首页',title:'FitFuel Pro · 产品原型',href:'cases/fitfuel.html'},
  {src:'assets/work-079.webp',alt:'赛博西安古塔与数字光影',title:'赛博西安 · AI城市影像',href:'cases/cyber.html'}
 ];
 let slideIndex=0,swiped=false;
@@ -29,7 +29,7 @@ const order={product:['fitfuel','core','cyber'],design:['core','cyber','fitfuel'
 function route(name){
  const list=document.getElementById('featuredProjects');order[name].forEach(id=>list.append(document.querySelector(`[data-project="${id}"]`)));
  document.querySelectorAll('[data-route]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.route===name)));
- document.getElementById('routeNote').textContent=name==='product'?'先看可操作流程，再看内容表达。运营方向的真实用户试用仍待进行。':'先看角色与成片，再看产品交互。生成式概念稿放在补充探索中。';
+ document.getElementById('routeNote').textContent=name==='product'?'先看可操作流程，再看内容表达。产品用户试用仍待进行。':'先看角色与成片，再看产品交互。生成式概念稿放在补充探索中。';
  showSlide(name==='product'?1:0);
 }
 document.querySelectorAll('[data-route]').forEach(button=>button.onclick=()=>route(button.dataset.route));
@@ -42,7 +42,7 @@ document.querySelectorAll('video').forEach(video=>video.addEventListener('play',
 // Preserve existing résumé and README hash URLs from the previous site.
 function handleLegacyHash(){if(location.hash.startsWith('#/')){
  const previous=location.hash.slice(1);
- const destinations={'/works':'#selected','/about':'#about','/project/fitfuel-pro':'demos/fitfuel/case.html','/project/standing-on-the-core':'cases/core.html','/project/cyber-xian':'cases/cyber.html','/project/apple-universe':'demos/apple/index.html','/project/green-glazed-dog':'#gallery','/project/poster-studies':'#gallery'};
+ const destinations={'/works':'#selected','/about':'#about','/project/fitfuel-pro':'cases/fitfuel.html','/project/standing-on-the-core':'cases/core.html','/project/cyber-xian':'cases/cyber.html','/project/apple-universe':'demos/apple/index.html','/project/green-glazed-dog':'#gallery','/project/poster-studies':'#gallery'};
  location.replace(destinations[previous]||'#selected');
 }}
 window.addEventListener('hashchange',handleLegacyHash);handleLegacyHash();
