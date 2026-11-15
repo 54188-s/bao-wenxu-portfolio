@@ -92062,7 +92062,8 @@ const DeploymentMath=(()=>{
  const axis=(a,t)=>[Math.cos(t/2),...scale(unit(a),Math.sin(t/2))];
  const rotate=(v,q)=>{const t=scale(cross(q.slice(1),v),2);return add(v,add(scale(t,q[0]),cross(q.slice(1),t)));};
  const between=(a,b)=>{const c=cross(a,b),w=1+dot(a,b);if(w<1e-8)return axis(Math.abs(a[0])<.9?cross(a,[1,0,0]):cross(a,[0,1,0]),Math.PI);const q=[w,...c],n=Math.hypot(...q);return q.map(v=>v/n);};
- const roofAngle=(d,p)=>d.deploy_angle*Math.PI/180*(1-smooth(...d.deploy_window,p));
+ const phaseFor=(d,p)=>d.deploy_pre_eased?Math.max(0,Math.min(1,(p-d.deploy_window[0])/(d.deploy_window[1]-d.deploy_window[0]))):smooth(...d.deploy_window,p);
+ const roofAngle=(d,p)=>d.deploy_angle*Math.PI/180*(1-phaseFor(d,p));
  function solve(d,p){
   const rest=d.deploy_rest_pos,rotation=d.deploy_rest_quat,kind=d.deploy_kind;
   if(p>=1)return {position:[...rest],quaternion:[...rotation],angle:0};
@@ -92073,7 +92074,7 @@ const DeploymentMath=(()=>{
    return {position:add(base,scale(dir,offset)),quaternion:multiply(delta,rotation),angle,length:L,overlap:[l0-slide,l1-slide],eye,base,direction:dir};
   }
   if(kind==='rack'){const angle=roofAngle(d,p);return {position:add(rest,scale(d.deploy_axis,d.deploy_radius*angle)),quaternion:[...rotation],angle};}
-  const phase=smooth(...d.deploy_window,p);
+  const phase=phaseFor(d,p);
   if(kind==='lock')return {position:add(rest,scale(d.deploy_axis,-d.deploy_stroke*(1-phase))),quaternion:[...rotation],locked:phase};
   return {position:add(rest,[0,0,-d.deploy_travel*(1-phase)]),quaternion:[...rotation],extension:phase};
  }
@@ -92146,6 +92147,19 @@ function assemblySummary(){
 // Every upper portal, drawer, cassette and roof receiver has a finite path.
 // The common upper carrier remains at its authored origin throughout the film.
 let progressiveParts=[],progressiveTime=39.4;
+const CHOREOGRAPHY_TIER_LIMIT=2;
+const choreographed=d=>(d.part_tier??0)<=CHOREOGRAPHY_TIER_LIMIT&&['roof','floor'].includes(d.part_kind);
+const flowEase=(a,b,p)=>{const t=partClamp((p-a)/(b-a));return t*t*t*(t*(t*6-15)+10);};
+const storyRoofStart=[11.3,17.5,23.5];
+function partTiming(o){
+ const d=o.userData,tier=d.part_tier??0;
+ if(d.part_kind==='floor'){
+  const ceiling=o.name.includes('_ceiling_'),corner=o.name.split('_').slice(-2).map(Number),order=(corner[0]>0?2:0)+(corner[1]>0?1:0);
+  return{start:storyRoofStart[tier]+(ceiling?(tier===2?2.1:2.5):-.45)+order*.16,duration:ceiling?(tier===2?.9:1.6):(tier===2?2.1:2.4)};
+ }
+ if(d.part_kind==='rail')return{start:d.part_start-6,duration:d.part_duration};
+ return{start:d.part_start,duration:choreographed(d)&&d.part_kind==='roof'?(tier===2?2:3):d.part_duration};
+}
 const partClamp=x=>Math.max(0,Math.min(1,x)),partEase=(a,b,p)=>{const t=partClamp((p-a)/(b-a));return t*t*(3-2*t);};
 function prepareProgressive(){
  progressiveParts=[];model.updateMatrixWorld(true);
@@ -92153,7 +92167,7 @@ function prepareProgressive(){
   const group=new THREE.Group();group.name='P_ArchLights';
   for(const pos of [[0,4.7,16.2],[16.2,4.7,0],[0,6.0,0]]){const inside=pos[0]===0&&pos[2]===0,light=new THREE.PointLight(inside?'#ffd9b0':'#ffbb78',inside?35:85,14,2);light.position.set(...pos);light.userData.upgradeIntensity=light.intensity;group.add(light);}showroom.add(group);
  }
- model.traverse(o=>{if(o.userData.part_kind){o._partRestPosition??=o.position.clone();o._partRestQuaternion??=o.quaternion.clone();progressiveParts.push(o);}});
+ model.traverse(o=>{if(o.userData.part_kind){o._partRestPosition??=o.position.clone();o._partRestQuaternion??=o.quaternion.clone();o._motionTiming=partTiming(o);progressiveParts.push(o);}});
  const modelInverse=model.matrixWorld.clone().invert();
  for(const o of rigRoots){
   o._rigParentRestMatrix??=modelInverse.clone().multiply(o.parent.matrixWorld);o._rigParentRestInverse??=o._rigParentRestMatrix.clone().invert();o._rigParentRestRotation??=new THREE.Quaternion().setFromRotationMatrix(o._rigParentRestMatrix).invert();
@@ -92176,31 +92190,31 @@ function setUpperMechanism(fraction){
 function setProgressivePose(time){
  progressiveTime=time;
  for(const o of progressiveParts){
-  const d=o.userData,p=partClamp((time-d.part_start)/d.part_duration);o._partProgress=p;if(d.part_kind==='roof_guide')continue;
+  const d=o.userData,motion=o._motionTiming,p=partClamp((time-motion.start)/motion.duration),flow=choreographed(d),ease=flow?flowEase:partEase;o._partProgress=p;if(d.part_kind==='roof_guide')continue;
   if(p>=1){o.position.copy(o._partRestPosition);o.quaternion.copy(o._partRestQuaternion);o._roofLift=0;o._roofUnfold=1;continue;}
   let z=0,x=0,y=0,angle=0;
   if(['post','rail','gantry'].includes(d.part_kind)){
-   z=d.part_feed*(1-partEase(0,.32,p));angle=(d.part_angle||90)*(1-partEase(.22,1,p));
+   z=d.part_feed*(1-ease(0,.32,p));angle=(d.part_angle||90)*(1-ease(.22,1,p));
   }else if(d.part_kind==='roof'){
-   const unfold=partEase(.18,.78,p),lift=partEase(.55,1,o.parent?._partProgress||0)*(1-partEase(.78,1,p));
+   const wideFlow=flow&&d.part_tier<2,roofEase=wideFlow?flowEase:partEase;
+   const unfold=roofEase(wideFlow?.06:.18,wideFlow?.80:.78,p),lift=partEase(.55,1,o.parent?._partProgress||0)*(1-roofEase(wideFlow?.48:.78,1,p));
    o._roofLift=d.part_lift*lift;o._roofUnfold=unfold;
    if(!d.part_legacy){z=o._roofLift;angle=95*(1-unfold);}
   }else if(d.part_kind==='floor'){
-   const lift=partEase(0,.48,p),slide=partEase(.48,.84,p),lock=partEase(.84,1,p);
-   x=d.part_shift[0]*(1-slide);y=d.part_shift[1]*(1-slide);z=THREE.MathUtils.lerp(d.part_feed,-.85,lift)*(1-lock);
+   o.position.copy(o._partRestPosition);o.position.y-=(o.name.includes('_ceiling_')?(d.part_tier===2?.25:.6):.8)*(1-flowEase(0,1,p));o.quaternion.copy(o._partRestQuaternion);continue;
   }else z=(d.part_feed||0)*(1-partEase(0,1,p));
   o.position.copy(o._partRestPosition).add(new THREE.Vector3(x,z,-y));
   o.quaternion.setFromAxisAngle(assemblyPoint(d.part_axis),THREE.MathUtils.degToRad(angle)).multiply(o._partRestQuaternion);
  }
  const roofMap=new Map(progressiveParts.filter(o=>o.userData.part_kind==='roof').map(o=>[o.name,o]));
  for(const o of progressiveParts)if(o.userData.part_kind==='roof_guide'){
-  const d=o.userData,owner=roofMap.get(THREE.PropertyBinding.sanitizeNodeName(d.part_owner));o.position.copy(o._partRestPosition).add(new THREE.Vector3(0,(owner?._roofLift||0)*d.part_stage/2,0));o.quaternion.copy(o._partRestQuaternion);
+  const d=o.userData,owner=roofMap.get(THREE.PropertyBinding.sanitizeNodeName(d.part_owner));o._partProgress=owner?._partProgress??o._partProgress;o.position.copy(o._partRestPosition).add(new THREE.Vector3(0,(owner?._roofLift||0)*d.part_stage/2,0));o.quaternion.copy(o._partRestQuaternion);
  }
  for(const o of rigRoots){
   const d=o.userData,owner=o._partOwner;let u;
   if(owner?.userData.part_kind==='roof'){
    if(owner._partProgress>=1){applyRigPose(o,1);continue;}
-   u=owner._roofUnfold||0;const lift=owner._roofLift||0,data={...d,deploy_window:[0,1]};
+   u=owner._roofUnfold||0;const lift=owner._roofLift||0,data={...d,deploy_window:[0,1],deploy_pre_eased:choreographed(owner.userData)};
    if('deploy_angle'in data)data.deploy_angle=-95;
    for(const key of ['deploy_pivot','deploy_eye'])if(data[key])data[key]=data[key].map((v,i)=>v+(i===2?lift:0));
    if(['outer','middle','rod'].includes(data.deploy_kind)&&lift){
@@ -92208,17 +92222,43 @@ function setProgressivePose(time){
     const q=new THREE.Quaternion().setFromUnitVectors(before,after).multiply(new THREE.Quaternion(r[1],r[3],-r[2],r[0]));data.deploy_rest_quat=[q.w,q.x,-q.z,q.y];
    }
    if(['roof','rack','lock'].includes(data.deploy_kind))data.deploy_rest_pos=data.deploy_rest_pos.map((v,i)=>v+(i===2?lift:0));
-   applyRigPose(o,Math.min(u,1-1e-9),data);continue;
+   const drivenPhase=data.deploy_kind==='lock'&&choreographed(owner.userData)?flowEase(.88,1,owner._partProgress):u;
+   applyRigPose(o,Math.min(drivenPhase,1-1e-9),data);continue;
   }
-  if(d.deploy_kind==='panel'){u=partEase(d.part_wall_start,d.part_wall_start+d.part_wall_duration,time);o._wallProgress=u;}
-  else if(d.deploy_kind==='crown')u=partEase(37.5,39.,time);else u=1;
-  const window=d.deploy_window;applyRigPose(o,u>=1?1:window[0]+(window[1]-window[0])*u);
+  if(d.deploy_kind==='panel'){u=flowEase(d.part_wall_start-5,d.part_wall_start+d.part_wall_duration-5,time);o._wallProgress=u;}
+  else if(d.deploy_kind==='crown')u=flowEase(35.,39.,time);else u=1;
+  const window=d.deploy_window;applyRigPose(o,u>=1?1:window[0]+(window[1]-window[0])*u,d.deploy_kind==='panel'?{...d,deploy_pre_eased:true}:null);
  }
  model?.updateMatrixWorld(true);needsRender=true;
 }
 function progressiveSummary(){
  const counts={};for(const o of progressiveParts){const k=o.userData.part_kind,s=counts[k]??={total:0,waiting:0,moving:0,done:0};s.total++;if(o._partProgress===undefined||o._partProgress>=1)s.done++;else if(o._partProgress<=0)s.waiting++;else s.moving++;}
- return{time:progressiveTime,counts,upperCarrierY:upperCarrier?.position.y||0,restError:Math.max(0,...progressiveParts.map(o=>Math.max(o.position.distanceTo(o._partRestPosition),1-Math.abs(o.quaternion.dot(o._partRestQuaternion))))),scaleError:Math.max(0,...progressiveParts.flatMap(o=>o.scale.toArray().map(v=>Math.abs(v-1))))};
+ const stories=[0,1,2].map(tier=>{const rows=progressiveParts.filter(o=>o.userData.part_tier===tier),count=kind=>{const a=rows.filter(o=>o.userData.part_kind===kind);return{total:a.length,waiting:a.filter(o=>o._partProgress<=0).length,moving:a.filter(o=>o._partProgress>0&&o._partProgress<1).length,done:a.filter(o=>o._partProgress>=1).length};};return{tier,post:count('post'),roof:count('roof'),floor:count('floor')};});
+ return{stories,motion:{mode:"story-integrated",roofDuration:[3,3,2],tierLimit:CHOREOGRAPHY_TIER_LIMIT},time:progressiveTime,counts,upperCarrierY:upperCarrier?.position.y||0,restError:Math.max(0,...progressiveParts.map(o=>Math.max(o.position.distanceTo(o._partRestPosition),1-Math.abs(o.quaternion.dot(o._partRestQuaternion))))),scaleError:Math.max(0,...progressiveParts.flatMap(o=>o.scale.toArray().map(v=>Math.abs(v-1))))};
+}
+
+// Merge the moving receiver tubes without freezing their poses. The original
+// meshes remain the source of kinematics and picking; only drawing is shared.
+function makeMovingGuideBatch(root,record){
+ const geometry=record.batch.geometry.clone(),material=record.batch.material.clone(),first=record.sources[0];
+ material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(0,1,0),-(first._cineUniforms?.floor.value??9.68))];material.clipShadows=true;renderer.localClippingEnabled=true;
+ geometry.attributes.position.setUsage(THREE.DynamicDrawUsage);geometry.attributes.normal?.setUsage(THREE.DynamicDrawUsage);
+ const mesh=new THREE.Mesh(geometry,material);mesh.name='MovingGuideBatch_'+record.batch.name;mesh._isRestBatch=true;mesh.visible=false;mesh.frustumCulled=false;mesh.castShadow=mesh.receiveShadow=true;mesh.userData={...record.batch.userData};root.add(mesh);
+ let offset=0;const entries=record.sources.map(source=>{const entry={source,offset};offset+=source.geometry.attributes.position.count;source._movingGuideEntry={mesh,offset:entry.offset};return entry;});
+ return{mesh,entries,matrix:new THREE.Matrix4(),inverse:new THREE.Matrix4(),normal:new THREE.Matrix3(),point:new THREE.Vector3()};
+}
+function updateMovingGuideBatch(root,record){
+ const f=record.movingGuide,positions=f.mesh.geometry.attributes.position,normals=f.mesh.geometry.attributes.normal;f.inverse.copy(root.matrixWorld).invert();let exposed=false;
+ for(const {source,offset}of f.entries){
+  const visible=source._cacheAllowed!==false&&sourceExposed(source),g=source.geometry,position=g.attributes.position,normal=g.attributes.normal;
+  source._motionBatched=visible;source._restCached=false;source.visible=false;exposed||=visible;
+  if(visible){f.matrix.copy(f.inverse).multiply(source.matrixWorld);f.normal.getNormalMatrix(f.matrix);}
+  for(let i=0;i<position.count;i++){
+   if(visible){f.point.fromBufferAttribute(position,i).applyMatrix4(f.matrix);positions.setXYZ(offset+i,f.point.x,f.point.y,f.point.z);if(normal&&normals){f.point.fromBufferAttribute(normal,i).applyNormalMatrix(f.normal);normals.setXYZ(offset+i,f.point.x,f.point.y,f.point.z);}}
+   else positions.setXYZ(offset+i,0,-1000,0);
+  }
+ }
+ positions.needsUpdate=true;if(normals)normals.needsUpdate=true;f.mesh.visible=exposed&&record.batch._cacheAllowed!==false;
 }
 
 // Keep the authored pieces for motion and triangle picking. Once an entire
@@ -92252,7 +92292,8 @@ function makeRestBatches(root){
   batch.userData={component_id:first.userData.component_id,layer_id:first.userData.layer_id,night_only:first.userData.night_only,baseColor:material.color.clone(),baseEmissive:material.emissive.clone(),prepared:true};
   root.add(batch);batches.push(batch);records.push({batch,sources:items});for(const m of items)m._restBatch=batch;
  }
- const state={batches,records,sources};root._restBatchState=state;return state;
+ const movingGuideBatches=[];for(const record of records)if(cacheBucket(record.sources[0]).startsWith('roof_guide|')){record.movingGuide=makeMovingGuideBatch(root,record);movingGuideBatches.push(record.movingGuide.mesh);}
+ const state={batches,records,sources,movingGuideBatches};root._restBatchState=state;return state;
 }
 function adoptRestBatches(){
  restCacheState=CONFIG.cyber?makeRestBatches(model):null;
@@ -92283,7 +92324,8 @@ function applyRestBatches(){
  const enabled=mechanismProgress<.000001||!!cinematic;
  for(const row of restCacheState.records){
   const active=enabled&&row.sources.every(cacheReady);row.batch.visible=active&&row.batch._cacheAllowed!==false;
-  for(const source of row.sources){const allowed=source._cacheAllowed!==false;source._restCached=active&&allowed;source.visible=!active&&allowed&&sourceExposed(source);}
+  if(row.movingGuide){if(cinematic&&!active){updateMovingGuideBatch(model,row);continue;}row.movingGuide.mesh.visible=false;}
+  for(const source of row.sources){source._motionBatched=false;const allowed=source._cacheAllowed!==false;source._restCached=active&&allowed;source.visible=!active&&allowed&&sourceExposed(source);}
  }
 }
 function syncVisibility(){
@@ -92365,6 +92407,53 @@ function updateKineticFx(fx,t){
 }
 function kineticSummary(){return kineticFx?{roofTips:kineticFx.rows.length,visible:kineticFx.group.visible,trails:kineticFx.lineSegments,sparksEmitted:kineticFx.totalEmitted}:null;}
 
+// A finite gust precedes erosion. The same shared cinematic clock reverses it.
+// World-space trails pass in front of and behind the original tower, with depth testing.
+function createWindOnset(shared){
+ const random=cineRandom(19473),mobile=innerWidth<761,group=new THREE.Group();group.name='WindOnsetGust';
+ const positions=[],paths=[],styles=[],uvs=[],indices=[],trailCount=mobile?26:38,segments=20;
+ for(let i=0;i<trailCount;i++){
+  const ground=i<Math.floor(trailCount*.45),soft=i>=trailCount-5;
+  const y=soft?.4+random()*1.2:ground?.3+random()*1.9:9+random()*21,z=i%5===0?-14-random()*9:25+random()*13;
+  const start=.025+random()*.48,life=1.1+random()*.38,length=soft?18+random()*14:ground?7+random()*9:3+random()*6;
+  const width=soft?2.4+random()*1.2:.10+random()*.15,alpha=soft?.24:ground?.40:.50,seed=random()*20,base=positions.length/3;
+  for(let j=0;j<=segments;j++)for(let side=0;side<2;side++){
+   positions.push(j/segments,side,0);uvs.push(j/segments,side);paths.push(y,z,start,life);styles.push(length,width,seed,alpha);
+  }
+  for(let j=0;j<segments;j++){const k=base+j*2;indices.push(k,k+1,k+2,k+1,k+3,k+2);}
+ }
+ const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setAttribute('aPath',new THREE.Float32BufferAttribute(paths,4));geometry.setAttribute('aStyle',new THREE.Float32BufferAttribute(styles,4));geometry.setIndex(indices);
+ const uniforms={uTime:shared.uTime,uColor:{value:new THREE.Color('#83755e')}};
+ const material=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,side:THREE.DoubleSide,
+  vertexShader:`uniform float uTime;attribute vec4 aPath,aStyle;varying vec2 vUv;varying float vAlpha,vSeed;
+   void main(){float age=(uTime-aPath.z)/aPath.w;float x=-48.+100.*age-(1.-uv.x)*aStyle.x;
+   float bend=exp(-x*x*.004)*(.4+sin(aStyle.z)*.6)*1.4;
+   vec3 p=vec3(x,max(.09,aPath.x+sin(x*.17+aStyle.z)*.28+bend),aPath.y+x*.24+sin(x*.08+aStyle.z)*.65);
+   vec4 view=modelViewMatrix*vec4(p,1.);view.y+=(uv.y*2.-1.)*aStyle.y;gl_Position=projectionMatrix*view;
+   vUv=uv;vSeed=aStyle.z;vAlpha=aStyle.w*smoothstep(0.,.13,age)*(1.-smoothstep(.73,1.,age))*(1.-smoothstep(1.7,2.1,uTime));}`,
+  fragmentShader:`uniform vec3 uColor;uniform float uTime;varying vec2 vUv;varying float vAlpha,vSeed;${cineNoise}
+   void main(){float width=exp(-pow((vUv.y-.5)*3.7,2.));float tip=pow(max(0.,sin(vUv.x*3.14159265)),.7);
+   float grain=.58+.42*cnoise(vec3(vUv.x*9.+uTime*2.,vUv.y*3.,vSeed));float a=vAlpha*width*tip*grain;if(a<.002)discard;gl_FragColor=vec4(uColor,a);
+   #include <tonemapping_fragment>
+   #include <colorspace_fragment>}`});
+ const trails=new THREE.Mesh(geometry,material);trails.frustumCulled=false;trails.renderOrder=3;group.add(trails);
+ const dustCount=mobile?260:480,dustPosition=new Float32Array(dustCount*3),dustSeeds=new Float32Array(dustCount*4);
+ for(let i=0;i<dustCount;i++){
+  const low=i<dustCount*.75;dustPosition.set([-42-random()*14,low?.12+random()*2.6:10+random()*21,6+random()*26],i*3);dustSeeds.set([random(),random(),random(),random()],i*4);
+ }
+ const dustGeometry=new THREE.BufferGeometry();dustGeometry.setAttribute('position',new THREE.BufferAttribute(dustPosition,3));dustGeometry.setAttribute('aSeed',new THREE.BufferAttribute(dustSeeds,4));
+ const dustMaterial=new THREE.ShaderMaterial({uniforms:{uTime:shared.uTime,uHeight:shared.uHeight,uRatio:shared.uRatio,uColor:{value:new THREE.Color('#76644b')}},transparent:true,depthWrite:false,
+  vertexShader:`uniform float uTime,uHeight,uRatio;attribute vec4 aSeed;varying float vAlpha;
+   void main(){float age=(uTime-aSeed.x*.53)/1.55;vec3 p=position;p.x+=age*(89.+aSeed.y*18.);p.z+=age*21.;p.y+=sin(age*6.+aSeed.z*7.)*.32+max(0.,age)*(.2+aSeed.w*.65);
+   vec4 view=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*view;gl_PointSize=clamp((.08+aSeed.w*.13)*uHeight/max(1.,-view.z),1.1*uRatio,3.4*uRatio);
+   vAlpha=smoothstep(0.,.12,age)*(1.-smoothstep(.64,1.,age))*(.42+aSeed.y*.4);}`,
+  fragmentShader:`uniform vec3 uColor;varying float vAlpha;void main(){float r=length(gl_PointCoord-.5);float a=vAlpha*(1.-smoothstep(.12,.5,r));if(a<.003)discard;gl_FragColor=vec4(uColor,a);
+   #include <tonemapping_fragment>
+   #include <colorspace_fragment>}`});
+ const dust=new THREE.Points(dustGeometry,dustMaterial);dust.frustumCulled=false;dust.renderOrder=3;group.add(dust);
+ group.visible=true;return{group,trails,dust,trailCount,dustCount};
+}
+
 // Combined trial: mechanical base emerges first, terraces hinge, original upper deploys.
 const UPGRADE_BASE=9.870438937811523,UPGRADE_SCALE=2/3;
 const MERGE_DURATION=DeploymentClock.duration,ASSEMBLY_DURATION=39.4,GROUND_END=DeploymentClock.groundEnd;
@@ -92374,11 +92463,17 @@ const cineClamp=x=>Math.max(0,Math.min(1,x)),cineSmooth=(a,b,t)=>{const p=cineCl
 const cineNoise=`float chash(vec3 p){p=fract(p*.3183099+vec3(.11,.23,.37));p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
 float cnoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(mix(chash(i),chash(i+vec3(1,0,0)),f.x),mix(chash(i+vec3(0,1,0)),chash(i+vec3(1,1,0)),f.x),f.y),mix(mix(chash(i+vec3(0,0,1)),chash(i+vec3(1,0,1)),f.x),mix(chash(i+vec3(0,1,1)),chash(i+vec3(1,1,1)),f.x),f.y),f.z);}
 float erosionField(vec3 p){return (p.x*.83+p.z*.35+18.)/36.+(cnoise(p*.85)-.5)*.09+(cnoise(p*3.)-.5)*.035;}`;
+function storyClipHeight(mesh){
+ let part=null,tier=null;
+ for(let p=mesh.parent;p;p=p.parent){const d=p.userData;if(!part&&d.part_kind)part=p;if(tier===null&&d.part_tier!==undefined)tier=d.part_tier;if(tier===null&&d.deploy_tier!==undefined)tier=d.deploy_tier;}
+ if(part?.userData.part_kind==='floor'){part._floorClipY??=new THREE.Box3().setFromObject(part).min.y-.02;return Math.max(9.68,part._floorClipY);}
+ return Math.max(9.68,([14.8056573868,26.7056598663,34.705657959][tier??0])*UPGRADE_SCALE-.12);
+}
 function prepareEffectMaterial(mesh){
  if(mesh._cineUniforms)return;
  for(let p=mesh.parent;p;p=p.parent)for(const key of ['component_id','layer_id','night_only','part_clip_floor'])if(mesh.userData[key]===undefined&&p.userData[key]!==undefined)mesh.userData[key]=p.userData[key];
  if(mesh.userData.part_clip_floor){renderer.localClippingEnabled=true;mesh.material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(0,1,0),-mesh.userData.part_clip_floor*UPGRADE_SCALE)];mesh.material.clipShadows=true;}
- const u=mesh._cineUniforms={mode:{value:0},sweep:cineUniforms.sweep,floor:{value:mesh.userData.part_clip_floor?mesh.userData.part_clip_floor*UPGRADE_SCALE:9.68}};
+ const u=mesh._cineUniforms={mode:{value:0},sweep:cineUniforms.sweep,floor:{value:Math.max(storyClipHeight(mesh),mesh.userData.part_clip_floor?mesh.userData.part_clip_floor*UPGRADE_SCALE:9.68)}};
  const hook=shader=>{
   Object.assign(shader.uniforms,{uMode:u.mode,uSweep:u.sweep,uFloor:u.floor});
   shader.vertexShader='varying vec3 vUpgradeWorld;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nvUpgradeWorld=(modelMatrix*vec4(transformed,1.)).xyz;');
@@ -92436,7 +92531,7 @@ function createCinematicEffects(present){
  void main(){float age=max(0.,(uSweep-erosionField(position))/.52)+max(0.,uTime-3.3)*.9;vec3 p=position;p+=vec3(age*(5.+aSeed.x*5.),age*(.7+aSeed.y*1.5)+sin(age*3.+aSeed.z*6.)*age*.25,age*2.+sin(age*2.+aSeed.x*8.)*age*.5);vec4 view=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*view;gl_PointSize=min(4.*uRatio,(.035+aSeed.x*.05)*uHeight/max(1.,-view.z));vColor=aColor;vAlpha=smoothstep(0.,.07,age)*(1.-smoothstep(.5,1.4,age))*.42;}`,
  fragmentShader:`varying vec3 vColor;varying float vAlpha;void main(){float d=length(gl_PointCoord-.5);if(d>.5||vAlpha<.003)discard;gl_FragColor=vec4(vColor,vAlpha*(1.-smoothstep(.15,.5,d)));\n#include <tonemapping_fragment>\n#include <colorspace_fragment>}`});
  const group=new THREE.Group();group.name='ReversibleTransitionEffects';group.visible=false;scene.add(group);
- const points=new THREE.Points(geo,mat);points.frustumCulled=false;group.add(points);
+ const points=new THREE.Points(geo,mat);points.frustumCulled=false;group.add(points);const wind=createWindOnset(uniforms);group.add(wind.group);
  // Reuse the earlier amber ring, perimeter frame and hatch shader at today's footprint scale.
  const floorMat=new THREE.ShaderMaterial({uniforms:{uTime:cineUniforms.time,uGroundRadius:cineUniforms.groundRadius,uImpact:cineUniforms.impact},vertexShader:'varying vec3 vP;void main(){vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`uniform float uTime,uGroundRadius,uImpact;varying vec3 vP;${cineNoise}
  void main(){float r=length(vP.xy),wave=uGroundRadius;float ring=exp(-abs(r-wave)*1.8)*.6*step(0.,wave)*(1.-smoothstep(3.8,4.6,uTime));float box=max(abs(vP.x),abs(vP.y)),frame=exp(-abs(box-28.5)*5.)*smoothstep(2.7,3.0,uTime)*(1.-smoothstep(6.5,7.5,uTime));frame*=1.+2.5*uImpact;float hatch=frame>.001?step(.965,cnoise(vec3(vP.xy*.9,1.)))*step(box,28.5)*.13*frame:0.;float age=max(0.,uTime-5.62),shock=exp(-abs(r-(28.5+age*90.))*1.2)*.9*smoothstep(0.,.05,age)*(1.-smoothstep(.55,.95,age));float alpha=ring+shock+frame*.6+hatch;if(alpha<.002)discard;gl_FragColor=vec4(vec3(1.,.49,.17)*(ring+shock+frame*.5+hatch),alpha);
@@ -92450,7 +92545,7 @@ function createCinematicEffects(present){
  #include <tonemapping_fragment>
  #include <colorspace_fragment>}`,transparent:true,depthWrite:false});
  const dust=new THREE.Points(dustGeo,dustMat);dust.frustumCulled=false;dust.renderOrder=4;group.add(dust);
- return{group,points,floor,dust,outlineScale,particleCount:count,dustCount:64,shared:uniforms};
+ return{group,points,floor,dust,wind,outlineScale,particleCount:count,dustCount:64,shared:uniforms};
 }
 async function ensureCinematicAssets(){
  if(cineWarmPromise)return cineWarmPromise;
@@ -92464,7 +92559,7 @@ async function ensureCinematicAssets(){
   const target=modelCache.get('cyber'),present=modelCache.get('present'),restBatches=makeRestBatches(target),roots=[present,target],presence=roots.map(root=>root.parent===scene),visibility=[];for(const root of roots)root.traverse(o=>{if(o.isMesh)visibility.push([o,o.visible]);});
   cineEffects=createCinematicEffects(present);prepareKineticFx(target);const previous=renderer.getRenderTarget(),warmTarget=new THREE.WebGLRenderTarget(48,48),mood=state.presentationMix||0;cinePrewarming=true;
   async function warm(){renderer.setRenderTarget(previous);await renderer.compileAsync(scene,camera);renderer.setRenderTarget(warmTarget);await renderer.compileAsync(scene,camera);renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);}
-  try{for(const root of roots)scene.add(root);applyPresentation(1);cineEffects.group.visible=true;kineticFx.group.visible=true;for(const m of restBatches.batches)m.visible=true;for(const l of warmLights)l.visible=true;await warm();for(const l of warmLights)l.visible=false;await warm();applyPresentation(0);await warm();}
+  try{for(const root of roots)scene.add(root);applyPresentation(1);cineEffects.group.visible=true;kineticFx.group.visible=true;for(const m of [...restBatches.batches,...restBatches.movingGuideBatches])m.visible=true;for(const l of warmLights)l.visible=true;await warm();for(const l of warmLights)l.visible=false;await warm();applyPresentation(0);await warm();}
   finally{for(const [mesh,visible]of visibility)mesh.visible=visible;for(let i=0;i<roots.length;i++)if(!presence[i]&&roots[i].parent===scene)scene.remove(roots[i]);else if(presence[i]&&roots[i].parent!==scene)scene.add(roots[i]);cineEffects.group.visible=false;resetKineticFx();applyPresentation(mood);renderer.setRenderTarget(previous);warmTarget.dispose();cinePrewarming=false;renderer.shadowMap.needsUpdate=true;needsRender=true;}
   cineAssetsReady=true;
  })().catch(e=>{cineWarmPromise=null;throw e;});return cineWarmPromise;
@@ -92504,8 +92599,8 @@ function updateCinematic(now){
  const base=cineSmooth(3.5,6.9,at),terraces=[0,1,2,3].map(side=>cineSmooth(6.6+side*.18,8.45+side*.18,at));
  setBaseUpgrade(cineSmooth(6.2,8.2,at));setAssemblyPose(base,1,terraces);setProgressivePose(at);applyCinematicCamera(fx,t);
  showroom?.getObjectByName('P_ArchLights')?.traverse(o=>{if(o.isLight)o.intensity*=base;});applyRestBatches();updateKineticFx(fx,t);
- const back=fx.direction<0;if(t<1)setCinePhase('wind',back?'现代钟楼复原':'风起');else if(t<3.3)setCinePhase('erosion',back?'灰粒回聚，钟楼复原':'风化消散');else if(t<GROUND_END)setCinePhase('ground',back?'地景退回现代':'黑色地景扩散');else if(at<6.6)setCinePhase('rise',back?'机械基座下沉':'机械基座升起');else if(at<8.8)setCinePhase('terraces',back?'平台逐片收拢':'平台逐片翻合');else if(at<28.3&&progressiveParts.some(o=>o.userData.part_kind==='post'&&o._partProgress>0&&o._partProgress<1))setCinePhase('frames',back?'柱架逐组回收':'柱架逐组展开');else if(at<28.3)setCinePhase('roofs',back?'屋面逐片收拢':'屋面逐片拼装');else if(at<35)setCinePhase('floors',back?'楼板滑移回收':'楼板滑移锁合');else if(at<39)setCinePhase('walls',back?'墙板与护栏回收':'墙板与护栏就位');else setCinePhase('settle',back?'开始回收':'锁合完成');
- cineEffects.points.visible=t>.6&&t<4.8;cineEffects.floor.visible=t>2.65&&t<7.55;cineEffects.dust.visible=t>5.62&&t<6.9;cineEffects.group.visible=cineEffects.points.visible||cineEffects.floor.visible||cineEffects.dust.visible;cineEffects.shared.uHeight.value=renderer.domElement.height;renderer.shadowMap.needsUpdate=t>GROUND_END||now-fx.lastShadow>100;if(renderer.shadowMap.needsUpdate)fx.lastShadow=now;if(fx.skip||elapsed>=MERGE_DURATION)finishCinematic();
+ const back=fx.direction<0,integrated=progressiveParts.some(o=>o.userData.part_kind==='floor'&&o._partProgress>0&&o._partProgress<1);if(t<1)setCinePhase('wind',back?'现代钟楼复原':'风起');else if(t<3.3)setCinePhase('erosion',back?'灰粒回聚，钟楼复原':'风化消散');else if(t<GROUND_END)setCinePhase('ground',back?'地景退回现代':'黑色地景扩散');else if(at<6.6)setCinePhase('rise',back?'机械基座下沉':'机械基座升起');else if(at<8.8)setCinePhase('terraces',back?'平台逐片收拢':'平台逐片翻合');else if(integrated)setCinePhase('story',back?'本层屋面与底板同步收拢':'本层屋面与底板联动');else if(at<28.3&&progressiveParts.some(o=>o.userData.part_kind==='post'&&o._partProgress>0&&o._partProgress<1))setCinePhase('frames',back?'柱架逐组回收':'柱架逐组展开');else if(at<28.3)setCinePhase('roofs',back?'屋面逐片收拢':'屋面逐片拼装');else if(at<35)setCinePhase('finish',back?'护栏与墙板回收':'护栏与墙板收边锁合');else if(at<39)setCinePhase('crown',back?'宝顶收拢':'宝顶锁定');else setCinePhase('settle',back?'开始回收':'锁合完成');
+ cineEffects.points.visible=t>.6&&t<4.8;cineEffects.floor.visible=t>2.65&&t<7.55;cineEffects.dust.visible=t>5.62&&t<6.9;cineEffects.wind.group.visible=t>.025&&t<2.1;cineEffects.group.visible=cineEffects.points.visible||cineEffects.floor.visible||cineEffects.dust.visible||cineEffects.wind.group.visible;cineEffects.shared.uHeight.value=renderer.domElement.height;renderer.shadowMap.needsUpdate=t>GROUND_END||now-fx.lastShadow>100;if(renderer.shadowMap.needsUpdate)fx.lastShadow=now;if(fx.skip||elapsed>=MERGE_DURATION)finishCinematic();
 }
 async function finishCinematic(){
  const fx=cinematic;if(!fx||fx.finishing)return;fx.finishing=true;const reverse=fx.direction<0;
@@ -92516,7 +92611,7 @@ async function finishCinematic(){
   applyPresentation(reverse?fx.mood:1);camera.position.copy(fx.camFrom);controls.target.copy(fx.targetFrom);setRadialGround(1100,false);applyRestBatches();history.replaceState(null,'',reverse?'#present':'#cyber');state.cinematicPhase='idle';announce(reverse?'现代钟楼已复原，可继续查看。':'机械钟楼展开并锁合，可旋转、点选或分层查看。');
  }finally{fx.resolve?.();}
 }
-function cinematicState(){return{motionProfile:"continuous-velocity-quintic",mechanicalDuration:MERGE_DURATION-GROUND_END,kinetic:kineticSummary(),direction:cinematic?.direction||0,playTime:cinematic?.playTime||0,outlineVisible:!!cineEffects?.group.visible&&!!cineEffects?.floor.visible,duration:MERGE_DURATION,assemblyTime:cinematic?.assemblyTime??ASSEMBLY_DURATION,ground:radialSummary(),phase:state.cinematicPhase||'idle',time:cinematic?.time||0,prepared:cineAssetsReady,particles:cineEffects?.particleCount||0,effectsVisible:!!cineEffects?.group.visible,modelY:model?.position.y,mood:state.presentationMix||0,cameraLocked:!!cinematic,assembly:assemblySummary(),progressive:progressiveSummary(),renderCache:restCacheSummary()};}
+function cinematicState(){return{motionProfile:"continuous-velocity-quintic",mechanicalDuration:MERGE_DURATION-GROUND_END,wind:{active:!!cineEffects?.group.visible&&!!cineEffects?.wind.group.visible,trails:cineEffects?.wind.trailCount||0,dust:cineEffects?.wind.dustCount||0},kinetic:kineticSummary(),direction:cinematic?.direction||0,playTime:cinematic?.playTime||0,outlineVisible:!!cineEffects?.group.visible&&!!cineEffects?.floor.visible,duration:MERGE_DURATION,assemblyTime:cinematic?.assemblyTime??ASSEMBLY_DURATION,ground:radialSummary(),phase:state.cinematicPhase||'idle',time:cinematic?.time||0,prepared:cineAssetsReady,particles:cineEffects?.particleCount||0,effectsVisible:!!cineEffects?.group.visible,modelY:model?.position.y,mood:state.presentationMix||0,cameraLocked:!!cinematic,assembly:assemblySummary(),progressive:progressiveSummary(),renderCache:restCacheSummary()};}
 function presentationMetrics(){
  model.updateMatrixWorld(true);const rect=canvas.getBoundingClientRect(),p=new THREE.Vector3(),base=new THREE.Box3(),pixelBounds={left:Infinity,right:-Infinity,top:Infinity,bottom:-Infinity};
  for(const m of meshes){if(m.userData.night_only)continue;if(m.userData.layer_id==='base')base.union(new THREE.Box3().setFromObject(m));const a=m.geometry.getAttribute('position');for(let i=0;i<a.count;i+=Math.max(1,Math.floor(a.count/1600))){p.fromBufferAttribute(a,i).applyMatrix4(m.matrixWorld).project(camera);const x=rect.left+(p.x+1)*rect.width/2,y=rect.top+(1-p.y)*rect.height/2;pixelBounds.left=Math.min(pixelBounds.left,x);pixelBounds.right=Math.max(pixelBounds.right,x);pixelBounds.top=Math.min(pixelBounds.top,y);pixelBounds.bottom=Math.max(pixelBounds.bottom,y);}}
