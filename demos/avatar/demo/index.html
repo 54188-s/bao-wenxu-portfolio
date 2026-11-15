@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" href="data:,"/>
+<title>FitFuel 数字分身 · 3D 资产预览</title>
+<style>
+  :root{--bone:#f4f2ec;--ink:#141412;--ink-2:#4a4843;--ink-3:#8a867c;--rule:#d8d4c8;--accent:#e08a3c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bone);color:var(--ink);font-family:"Inter","Helvetica Neue",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;height:100vh;overflow:hidden}
+  #stage{position:fixed;inset:0}
+  canvas{display:block}
+  .panel{position:fixed;top:24px;left:24px;max-width:330px;background:rgba(255,253,248,.9);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;backdrop-filter:blur(8px)}
+  .eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  h1{font-size:19px;font-weight:600;letter-spacing:-.015em;margin:8px 0 6px}
+  p{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px}
+  dt{color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
+  dd{color:var(--ink)}
+  .row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  button{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.04em;padding:7px 12px;border:1px solid var(--ink);border-radius:7px;background:transparent;color:var(--ink);cursor:pointer;transition:.15s}
+  button:hover{background:var(--ink);color:var(--bone)}
+  button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#141412}
+  #hint{position:fixed;bottom:22px;left:24px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--ink-3)}
+  #status{position:fixed;top:24px;right:24px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;padding:8px 12px;border-radius:8px;border:1px solid var(--rule);background:rgba(255,253,248,.9);color:var(--ink-2)}
+  #status.err{border-color:#d6b3b3;background:#f8e9e9;color:#7a2f2f}
+  @media (max-width:640px){.panel{left:12px;right:12px;top:12px;max-width:none}#hint{display:none}}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="panel">
+  <div class="eyebrow">FITFuel · 3D COMPANION ASSET</div>
+  <h1>Q 版数字分身 · 实时预览</h1>
+  <p>加载 <code>export/fitfuel_companion.glb</code>：真实几何、PBR 材质与骨骼。拖动旋转，滚轮缩放，右键平移。</p>
+  <dl>
+    <dt>模型</dt><dd id="m-mesh">—</dd>
+    <dt>骨骼</dt><dd id="m-bones">—</dd>
+    <dt>动画</dt><dd id="m-anim">—</dd>
+    <dt>材质</dt><dd id="m-mats">—</dd>
+    <dt>状态</dt><dd id="m-state">加载中</dd>
+  </dl>
+  <div class="row">
+    <button id="btn-anim" aria-pressed="true">暂停动画</button>
+    <button id="btn-reset">重置视角</button>
+    <button id="btn-spin" aria-pressed="false">自动旋转</button>
+  </div>
+  <div class="row" id="hair-row" role="group" aria-label="发型">
+    <button data-hair="short" aria-pressed="true">短发</button>
+    <button data-hair="curly" aria-pressed="false">卷发</button>
+    <button data-hair="ponytail" aria-pressed="false">马尾</button>
+    <button data-hair="long" aria-pressed="false">中长发</button>
+  </div>
+</div>
+<div id="status">正在加载 GLB…</div>
+<div id="hint">左键拖动旋转 · 滚轮缩放 · 右键平移</div>
+
+<script type="importmap">
+{"imports":{"three":"./vendor/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { OrbitControls } from './vendor/OrbitControls.js';
+
+const statusEl = document.getElementById('status');
+const setStatus = (t, err) => { statusEl.textContent = t; statusEl.className = err ? 'err' : ''; };
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf4f2ec);
+
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.05, 100);
+const HOME = new THREE.Vector3(0, 1.55, 5.4);
+camera.position.copy(HOME);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.AgXToneMapping || THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+document.getElementById('stage').appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 1.55, 0);
+controls.enableDamping = true;
+controls.minDistance = 1.6;
+controls.maxDistance = 14;
+
+const key = new THREE.DirectionalLight(0xfff8f2, 1.95);
+key.position.set(-2.6, 4.2, 3.4); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -4; key.shadow.camera.right = 4;
+key.shadow.camera.top = 5; key.shadow.camera.bottom = -1;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xe8f0ff, 1.45); fill.position.set(3.6, 2.2, 2.4); scene.add(fill);
+const front = new THREE.DirectionalLight(0xfff4e8, 0.85); front.position.set(0.4, -4.0, 1.4); scene.add(front);
+const rim = new THREE.DirectionalLight(0xffffff, 1.5); rim.position.set(1.4, 2.6, -3.6); scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xfff6ea, 0x8c99a0, 1.45));
+
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(9, 64),
+  new THREE.MeshStandardMaterial({ color: 0xe9e5dc, roughness: 0.92, metalness: 0 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+let mixer = null, clips = [], model = null, spin = false, playing = true;
+let hairMeshes = [], hairStyle = 'short';
+const HAIR = {
+  short: ['FITFuel_Hair_Short'],
+  curly: ['FITFuel_Hair_Curly'],
+  ponytail: ['FITFuel_Hair_Ponytail','FITFuel_Hair_Ponytail_Tail','FITFuel_Hair_Ponytail_Knot'],
+  long: ['FITFuel_Hair_Long']
+};
+function applyHair(style){
+  hairStyle = HAIR[style] ? style : 'short';
+  const list = HAIR[hairStyle];
+  hairMeshes.forEach(m => { m.visible = list.indexOf(m.name) >= 0; });
+  document.querySelectorAll('[data-hair]').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.hair === hairStyle));
+  });
+  if (window.__fitfuel) window.__fitfuel.hair = hairStyle;
+}
+document.querySelectorAll('[data-hair]').forEach(b => {
+  b.addEventListener('click', () => applyHair(b.dataset.hair));
+});
+const clock = new THREE.Clock();
+
+new GLTFLoader().load(
+  '../export/fitfuel_companion.glb',
+  (gltf) => {
+    model = gltf.scene;
+    let meshes = 0, bones = 0;
+    const mats = new Set();
+    model.traverse(o => {
+      if (o.isMesh) { meshes++; o.castShadow = true; o.receiveShadow = true;
+        (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m && mats.add(m.name)); }
+      if (o.isBone) bones++;
+      if (/^FITFuel_Hair/.test(o.name)) hairMeshes.push(o);
+    });
+    applyHair('short');
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    model.position.sub(center);
+    model.position.y += size.y / 2;
+    scene.add(model);
+
+    clips = gltf.animations || [];
+    if (clips.length) {
+      mixer = new THREE.AnimationMixer(model);
+      mixer.clipAction(clips[0]).play();
+    }
+    controls.target.set(0, size.y * 0.52, 0);
+    camera.position.copy(HOME);
+
+    document.getElementById('m-mesh').textContent = meshes + ' meshes';
+    document.getElementById('m-bones').textContent = bones + ' bones';
+    document.getElementById('m-anim').textContent = clips.length ? clips[0].name : 'none';
+    document.getElementById('m-mats').textContent = mats.size + ' materials';
+    document.getElementById('m-state').textContent = 'READY';
+    setStatus('GLB 加载成功 · ' + meshes + ' 网格 / ' + bones + ' 骨骼', false);
+    window.__fitfuel = { meshes, bones, mats: mats.size, clips: clips.map(c => c.name), loaded: true, hair: hairStyle };
+  },
+  (evt) => {
+    if (evt.total) setStatus('下载中 ' + Math.round((evt.loaded / evt.total) * 100) + '%');
+  },
+  (err) => {
+    setStatus('GLB 加载失败: ' + err, true);
+    document.getElementById('m-state').textContent = 'ERROR';
+    window.__fitfuel = { loaded: false, error: String(err) };
+  }
+);
+
+document.getElementById('btn-anim').addEventListener('click', e => {
+  playing = !playing;
+  e.target.setAttribute('aria-pressed', String(playing));
+  e.target.textContent = playing ? '暂停动画' : '播放动画';
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  camera.position.copy(HOME);
+  controls.target.set(0, controls.target.y, 0);
+});
+document.getElementById('btn-spin').addEventListener('click', e => {
+  spin = !spin;
+  e.target.setAttribute('aria-pressed', String(spin));
+});
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+renderer.setAnimationLoop(() => {
+  const dt = clock.getDelta();
+  if (mixer && playing) mixer.update(dt);
+  if (spin) {
+    const a = 0.25 * dt;
+    const t = controls.target;
+    const dx = camera.position.x - t.x, dz = camera.position.z - t.z;
+    camera.position.x = t.x + dx * Math.cos(a) - dz * Math.sin(a);
+    camera.position.z = t.z + dx * Math.sin(a) + dz * Math.cos(a);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
