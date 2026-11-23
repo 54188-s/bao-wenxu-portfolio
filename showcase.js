@@ -1,8 +1,8 @@
 "use strict";
 const slides=[
- {src:'assets/work-057.webp',alt:'站在芯上的孩子角色三视图',title:'陇州社火 · 公益影像与角色',href:'cases/core.html'},
- {src:'assets/fitfuel-current.png',alt:'FitFuel可操作产品首页',title:'FitFuel Pro · 产品原型',href:'cases/fitfuel.html'},
- {src:'assets/work-079.webp',alt:'赛博西安古塔与数字光影',title:'赛博西安 · AI城市影像',href:'cases/cyber.html'}
+ {src:'assets/ops-results.jpg',alt:'AI内容运营成果与流程',title:'AI内容运营 · 成果与流程',href:'cases/operations.html'},
+ {src:'assets/review/mgl-lobby.png',alt:'MiniGameLab小游戏实机大厅',title:'MiniGameLab · 小游戏合集',href:'all-projects.html'},
+ {src:'assets/stand-steady.jpg',alt:'短剧中的竹木手艺场景',title:'站稳，再传下去 · 短剧',href:'#film'}
 ];
 let slideIndex=0,swiped=false;
 const deck=document.getElementById('deck');
